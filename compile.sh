@@ -12,14 +12,6 @@ export WEBRTC_VERSION=4515
 export ARCH=x64
 export TARGET_OS=android
 
-git clone https://github.com/ninja-build/ninja.git -b v1.8.2
-cd ninja
-./configure.py --bootstrap
-
-export PATH="$(pwd):$PATH"
-
-cd ..
-
 git clone --depth 1 https://chromium.googlesource.com/chromium/tools/depot_tools.git
 fetch --nohooks webrtc_android
 cd src
@@ -46,7 +38,7 @@ ninja -C "$output_dir" webrtc
 
 # Build non debug version
 is_debug="false"
-output_dir="$(pwd)/out/Release"
+output_dir="/out/Release"
 # generate ninja files
 gn gen "$output_dir" --root="src" \
   --args="is_debug=${is_debug} \
